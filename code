@@ -1,0 +1,150 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//estructuras
+typedef struct{
+	int d,m,a;
+
+}TFecha;//tipo de variable fecha
+
+typedef struct{
+	char ap [30];
+	char am [30];
+	char noms [30];
+
+}TNombre;//tipo de variable nombre
+
+typedef struct{
+	TNombre nom;
+	TFecha ingreso;
+	char categoria;
+	float salario;
+
+}TProgramador;//Variable de programador
+
+
+//prototipos
+TProgramador datos();
+TProgramador captura(); //Prototipo de funcion
+TProgramador calcula(TProgramador p);
+int dameTam(int *n);
+void capturaDa(TProgramador p[],int n);
+void calculaDa(TProgramador p[],int n);
+
+//principal
+int main(){
+    //Variable que contendrÃ¡ el tamaÃ±o del arreglo
+    int n;
+
+    //DarÃ¡ el tamaÃ±o del arreglo
+    dameTam(&n);
+
+    //Arreglo de Estructuras de TProgramador
+    TProgramador prog[n];
+
+    //Va a llenar todo el arreglo
+    capturaDa(prog,n);
+
+    calculaDa(prog,n);
+
+	return 0;
+}
+
+int dameTam(int *n){
+    printf("Dame el tamanio: ");
+    scanf("%d",n);
+}
+
+void capturaDa(TProgramador p[],int n){
+    int i;
+
+    for (i=0;i<n;i++){
+        p[i]=captura();
+    }
+}
+
+//desarrollo de funciones
+TProgramador captura(){
+	TProgramador p;
+	fflush(stdin);
+
+	printf("Apellido paterno:\n");
+	gets(p.nom.ap);
+	printf("Apellido materno:\n");
+	gets(p.nom.am);
+	printf("Nombre:\n");
+	gets(p.nom.noms);
+	printf("Categoria:\n");
+	scanf("%c",&p.categoria);
+	printf("Fecha:\n");
+	printf("Dia:\n");
+	scanf("%d",&p.ingreso.d);
+	printf("Mes:\n");
+	scanf("%d",&p.ingreso.m);
+	printf("AÃ±o de ingreso:\n");
+	scanf("%d",&p.ingreso.a);
+
+	return(p);
+}
+
+void calculaDa(TProgramador p[],int n){
+    int i;
+    TProgramador c;
+
+    for (i=0;i<n;i++){
+        c = p[i];
+        calcula(c);
+        p[i]=c;
+    }
+}
+
+TProgramador calcula(TProgramador p){
+	int x,i,aumento=0,aux=0;
+
+    switch(p.categoria){
+        case 'A':p.salario=50000;
+        	x=((2019)-(p.ingreso.a))/5;//sobre 5
+			for(i=0;i<=x;i++){
+				aux=(p.salario)*(.10);
+				aumento=p.salario+aux;
+				}
+				printf("%.2f",aumento);
+        break;
+        case 'B':p.salario=35000;
+           	x=((2019)-(p.ingreso.a))/5;//sobre 5
+			for(i=0;i<=x;i++){
+				aux=(p.salario)*(.10);
+				aumento=p.salario+aux;
+				}
+				printf("%.2f",p.salario);
+        break;
+        case 'C':p.salario=28000;
+        	x=((2019)-(p.ingreso.a))/5;//sobre 5
+			for(i=0;i<=x;i++){
+				aux=(p.salario)*(.10);
+				aumento=p.salario+aux;
+				}
+				printf("%.2f",p.salario);
+        break;
+        default: p.salario=20000;
+          	x=((2019)-(p.ingreso.a))/5;//sobre 5
+			for(i=0;i<=x;i++){
+				aux=(p.salario)*(.10);
+				aumento=p.salario+aux;
+				}
+				printf("%.2f",p.salario);
+        break;
+    }
+}
+
+/*void imprimeDa(TProgramador p[],int n)
+{
+    int i;
+
+    for (i=0;i<n;i++)
+    {
+        p[i]=imprime();
+    }
+}
+
+*/
